@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnbwfi65piakj"]
+
+[ext_resource type="Texture2D" uid="uid://cf0g3n2x5vvaj" path="res://assets/meson.png" id="1_x4n2o"]
+[ext_resource type="AudioStream" uid="uid://b613nu1h5ws4r" path="res://audio/musica_fondo.mp3" id="2_uc3sl"]
+
+[node name="Juego" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_x4n2o")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_uc3sl")
+autoplay = true

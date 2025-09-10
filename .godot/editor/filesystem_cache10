@@ -1,0 +1,15 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1757517947
+README.md::TextFile/TextFile::-1::1757511056::0::1::::<><><>0<>0<><>::
+::res://assets/::1757518858
+meson.png::CompressedTexture2D/CompressedTexture2D::5175810059213019909::1757511056::1757511273::1::::<><><>0<>0<>26cda215a8c5b46f83e143a8aa2cbee7<>res://.godot/imported/meson.png-0f6bc26d42365d015b5d61b09ae9cf25.ctex::
+Overcooked.png::CompressedTexture2D/CompressedTexture2D::8000877607003034624::1757516515::1757516515::1::::<><><>0<>0<>02d5703af7feba43da423ff69f6304c6<>res://.godot/imported/Overcooked.png-35e2b7d3b98e27193c9a9122f1a2639c.ctex::
+overcooking.png::CompressedTexture2D::5100253177160792229::1757518858::1757518859::1::::<><><>0<>0<>b6e84470e1ad2b992c801e6abebd8457<>res://.godot/imported/overcooking.png-6104c4b5fbff892fd535889711c0a005.ctex::
+::res://audio/::1757517947
+musica_fondo.mp3::AudioStreamMP3::4617673040186826019::1757517916::1757517947::1::::<><><>0<>0<>e6be162e3350cb73e1d62c84108ba8f8<>res://.godot/imported/musica_fondo.mp3-48c84589750dd33bd469c418972efc9e.mp3str::
+::res://scenes/::1757518157
+juego.tscn::PackedScene::5688705884704230157::1757518157::0::1::::<><><>0<>0<><>::uid://cf0g3n2x5vvaj::::res://assets/meson.png<>uid://b613nu1h5ws4r::::res://audio/musica_fondo.mp3
+main.tscn::PackedScene::913320435889550828::1757518157::0::1::::<><><>0<>0<><>::uid://bn2rpql8pbus1::::res://scripts/main.gd<>uid://dl8xjx0iqpkiq::::res://assets/Overcooked.png<>uid://bdjcr01rvm4by::::res://scripts/boton_inicio.gd<>uid://b613nu1h5ws4r::::res://audio/musica_fondo.mp3
+::res://scripts/::1757517244
+boton_inicio.gd::GDScript/GDScript::2615719760925291262::1757517244::0::1::::<>Button<><>0<>0<><>::
+main.gd::GDScript/GDScript::3355673685018667302::1757516944::0::1::::<>Node2D<><>0<>0<><>::
