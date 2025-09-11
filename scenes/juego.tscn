@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnbwfi65piakj"]
+[gd_scene load_steps=8 format=3 uid="uid://cnbwfi65piakj"]
 
 [ext_resource type="Texture2D" uid="uid://d3t732lh88026" path="res://assets/background_game.jpg" id="1_2ka1k"]
 [ext_resource type="PackedScene" uid="uid://c4mst2y6yq6jq" path="res://scenes/player.tscn" id="2_nxr8p"]
@@ -6,6 +6,15 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ka1k"]
 size = Vector2(63, 483)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmti5"]
+size = Vector2(23, 661)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vych7"]
+size = Vector2(1255, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqw7"]
+size = Vector2(56.75, 56.25)
 
 [node name="Juego" type="Node2D"]
 
@@ -17,8 +26,10 @@ offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 0
-offset_right = 1156.0
-offset_bottom = 651.0
+offset_left = 7.0
+offset_top = -4.0
+offset_right = 1163.0
+offset_bottom = 647.0
 texture = ExtResource("1_2ka1k")
 expand_mode = 1
 
@@ -29,8 +40,88 @@ position = Vector2(303, 347)
 stream = ExtResource("4_pew7j")
 autoplay = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Registradoras" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Registradoras"]
+light_mask = 3
+visibility_layer = 3
 position = Vector2(685, 407.5)
 shape = SubResource("RectangleShape2D_2ka1k")
+
+[node name="P_izquierda" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P_izquierda"]
+position = Vector2(3.5, 326.5)
+shape = SubResource("RectangleShape2D_vmti5")
+debug_color = Color(0.896773, 0.000196181, 0.774064, 0.42)
+
+[node name="P_derecha" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P_derecha"]
+position = Vector2(1176, 320)
+shape = SubResource("RectangleShape2D_vmti5")
+debug_color = Color(0.896773, 0.000196181, 0.774064, 0.42)
+
+[node name="P_abajo" type="StaticBody2D" parent="."]
+position = Vector2(340, 857)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P_abajo"]
+position = Vector2(254, -217)
+shape = SubResource("RectangleShape2D_vych7")
+
+[node name="P_arriba" type="StaticBody2D" parent="."]
+position = Vector2(340, 857)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P_arriba"]
+position = Vector2(254, -847)
+shape = SubResource("RectangleShape2D_vych7")
+
+[node name="Tomate" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tomate"]
+position = Vector2(126, 167)
+shape = SubResource("RectangleShape2D_jbqw7")
+
+[node name="Carne" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Carne"]
+position = Vector2(191, 166)
+shape = SubResource("RectangleShape2D_jbqw7")
+
+[node name="Lechuga" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lechuga"]
+position = Vector2(257, 165)
+shape = SubResource("RectangleShape2D_jbqw7")
+
+[node name="Queso" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Queso"]
+position = Vector2(328, 166)
+shape = SubResource("RectangleShape2D_jbqw7")
+
+[node name="Pan" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pan"]
+position = Vector2(391, 165)
+shape = SubResource("RectangleShape2D_jbqw7")
