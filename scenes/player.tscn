@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dq4c7ydhgf36s" path="res://scripts/player.gd" id="2_player"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 44.0
-height = 128.0
+radius = 26.0
+height = 94.0
 
 [sub_resource type="Animation" id="Animation_g2els"]
 length = 0.001
@@ -106,8 +106,8 @@ position = Vector2(51, 46)
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(52, 45)
-scale = Vector2(0.642157, 0.663666)
+position = Vector2(49.0303, 40.4682)
+scale = Vector2(0.491472, 0.454776)
 texture = ExtResource("1_3vyb7")
 hframes = 4
 vframes = 4

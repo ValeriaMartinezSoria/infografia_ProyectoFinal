@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wnl2wycv67n1"
-path="res://.godot/imported/tilemap.png-5e61b4f08267e3455a4ee95d454c23fa.ctex"
+uid="uid://b38t4a5j45tyn"
+path="res://.godot/imported/pisocos.jpg-5e96a6ebfb2c6146d7555d3e74e2dbfd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilemap.png"
-dest_files=["res://.godot/imported/tilemap.png-5e61b4f08267e3455a4ee95d454c23fa.ctex"]
+source_file="res://assets/pisocos.jpg"
+dest_files=["res://.godot/imported/pisocos.jpg-5e96a6ebfb2c6146d7555d3e74e2dbfd.ctex"]
 
 [params]
 
