@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dph5pq2r5mn11"]
+
+[ext_resource type="Texture2D" uid="uid://d28cctsfu2xhu" path="res://assets/idle.png" id="1_3vyb7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 22.0
+height = 74.0
+
+[node name="Player" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(51, 46)
+shape = SubResource("CapsuleShape2D_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(53, 41)
+scale = Vector2(0.642157, 0.663666)
+texture = ExtResource("1_3vyb7")

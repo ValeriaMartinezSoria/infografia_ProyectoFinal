@@ -1,3 +1,4 @@
 res://scenes/main.tscn
 res://scripts/boton_inicio.gd
 res://scenes/juego.tscn
+res://scenes/player.tscn
