@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://cnbwfi65piakj"]
 
-[ext_resource type="Texture2D" uid="uid://wnl2wycv67n1" path="res://assets/tilemap.png" id="2_2ka1k"]
-[ext_resource type="AudioStream" uid="uid://b613nu1h5ws4r" path="res://audio/musica_fondo.mp3" id="2_uc3sl"]
+[ext_resource type="Texture2D" uid="uid://wnl2wycv67n1" path="res://assets/tilemap.png" id="1_k3m2p"]
+[ext_resource type="PackedScene" uid="uid://c4mst2y6yq6jq" path="res://scenes/player.tscn" id="2_nxr8p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pew7j"]
-texture = ExtResource("2_2ka1k")
+texture = ExtResource("1_k3m2p")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -972,9 +972,9 @@ sources/1 = SubResource("TileSetAtlasSource_pew7j")
 
 [node name="Juego" type="Node2D"]
 
-[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_uc3sl")
-autoplay = true
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_iq6uk")
+format = 2
+
+[node name="Player" parent="." instance=ExtResource("2_nxr8p")]
+position = Vector2(576, 324)
