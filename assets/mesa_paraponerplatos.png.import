@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd5j22or6erj1"
-path="res://.godot/imported/pisoafuera.jpg-c32a7f70d9efc6e868e20a32a710c6b4.ctex"
+uid="uid://ey61kgy0xcyh"
+path="res://.godot/imported/mesa_paraponerplatos.png-c8f28944c28007ab6b0eb6d84c3b2a6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pisoafuera.jpg"
-dest_files=["res://.godot/imported/pisoafuera.jpg-c32a7f70d9efc6e868e20a32a710c6b4.ctex"]
+source_file="res://assets/mesa_paraponerplatos.png"
+dest_files=["res://.godot/imported/mesa_paraponerplatos.png-c8f28944c28007ab6b0eb6d84c3b2a6a.ctex"]
 
 [params]
 

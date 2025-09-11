@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dq4c7ydhgf36s" path="res://scripts/player.gd" id="2_player"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 26.0
-height = 94.0
+radius = 23.0
+height = 96.0
 
 [sub_resource type="Animation" id="Animation_g2els"]
 length = 0.001

@@ -1,12 +1,12 @@
+Sprite2D
+CollisionShape2D
+Area2D
+TextureRect
+Control
 AudioStreamPlayer
 TileMapLayer
 TileMap
-Sprite2D
-CollisionShape2D
 CharacterBody2D
-Sprite2D
 AnimationPlayer
 AudioStreamPlayer2D
-TextureRect
-Control
 Button

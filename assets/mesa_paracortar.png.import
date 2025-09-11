@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf0g3n2x5vvaj"
-path="res://.godot/imported/meson.png-0f6bc26d42365d015b5d61b09ae9cf25.ctex"
+uid="uid://crd7otqj3c0vs"
+path="res://.godot/imported/mesa_paracortar.png-2b3b3810fb58edd9b43c5c9fb207aeee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/meson.png"
-dest_files=["res://.godot/imported/meson.png-0f6bc26d42365d015b5d61b09ae9cf25.ctex"]
+source_file="res://assets/mesa_paracortar.png"
+dest_files=["res://.godot/imported/mesa_paracortar.png-2b3b3810fb58edd9b43c5c9fb207aeee.ctex"]
 
 [params]
 
