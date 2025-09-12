@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dq4c7ydhgf36s" path="res://scripts/player.gd" id="2_player"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 29.0
-height = 92.0
+radius = 41.0
+height = 98.0
 
 [sub_resource type="Animation" id="Animation_g2els"]
 length = 0.001
@@ -106,11 +106,11 @@ script = ExtResource("2_player")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 light_mask = 3
 visibility_layer = 3
-position = Vector2(119, 50)
+position = Vector2(131, 59)
 shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(119, 46)
+position = Vector2(131, 54)
 scale = Vector2(0.491472, 0.454776)
 texture = ExtResource("1_3vyb7")
 hframes = 4
