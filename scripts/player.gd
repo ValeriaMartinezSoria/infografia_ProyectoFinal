@@ -8,53 +8,14 @@ var carrying_object = null
 var can_pickup = false
 var pickup_area = null
 var can_pickup_tomato = false
+var can_pickup_meat = false
+var can_pickup_lettuce = false
+var can_pickup_cheese = false
+var can_pickup_bread = false
 
 func _ready():
 	print("\n=== Inicializando Player ===")
 	print("Nodo actual:", name)
-	print("Nodos hijos del jugador:", get_children())
-	
-	# Conectar señales de todas las Area2D de los mesones prep
-	var parent = get_parent().get_parent() # Obtenemos el nodo Juego
-	print("Nodo padre (Juego):", parent.name)
-	print("\nBuscando mesones prep...")
-	
-	for child in parent.get_children():
-		if child.name.begins_with("MesonPrep"):
-			print("\nEncontrado mesón:", child.name)
-			# Buscamos el StaticBody2D y Area2D dentro del mesón
-			var static_body = child.get_node_or_null("StaticBody2D")
-			var area = child.get_node_or_null("Area2D")
-			
-			if static_body:
-				print("- StaticBody2D encontrado")
-			else:
-				print("ERROR: No se encontró StaticBody2D en", child.name)
-				
-			if area:
-				print("- Area2D encontrada")
-				print("- Collision Layer:", area.collision_layer)
-				print("- Collision Mask:", area.collision_mask)
-				# Desconectamos primero por si acaso
-				if area.is_connected("body_entered", Callable(self, "_on_Area2D_body_entered")):
-					area.disconnect("body_entered", Callable(self, "_on_Area2D_body_entered"))
-				if area.is_connected("body_exited", Callable(self, "_on_Area2D_body_exited")):
-					area.disconnect("body_exited", Callable(self, "_on_Area2D_body_exited"))
-					
-				var result = area.connect("body_entered", Callable(self, "_on_Area2D_body_entered"))
-				if result == OK:
-					print("- Señal body_entered conectada correctamente")
-				else:
-					print("- Error al conectar body_entered")
-				
-				result = area.connect("body_exited", Callable(self, "_on_Area2D_body_exited"))
-				if result == OK:
-					print("- Señal body_exited conectada correctamente")
-				else:
-					print("- Error al conectar body_exited")
-			else:
-				print("ERROR: No se encontró Area2D en", child.name)
-	
 	# Añadir el grupo 'player' a este nodo para facilitar la detección
 	add_to_group("player")
 	print("\n=== Inicialización completada ===\n")
@@ -107,33 +68,78 @@ func _process(_delta):
 	# Solo permitir agarrar tomate si está en MesonPrep5 y presiona 'G'
 	if Input.is_action_just_pressed("Grab"):
 		print("Presionaste Grab")
-		if carrying_object == null and can_pickup_tomato:
-			print("Instanciando tomate")
-			var tomato_scene = preload("res://scenes/Tomato.tscn")
-			carrying_object = tomato_scene.instantiate()
-			add_child(carrying_object)
-			carrying_object.position = Vector2(119, 46) # Misma posición que el Sprite2D del jugador
-			carrying_object.z_index = self.z_index + 1
-			print("Tomate instanciado como hijo del jugador en ", carrying_object.position)
-		elif carrying_object != null and can_pickup_tomato:
-			print("Soltando tomate en el meson")
+		if carrying_object == null:
+			if can_pickup_tomato:
+				print("Instanciando tomate")
+				var tomato_scene = preload("res://scenes/Tomato.tscn")
+				carrying_object = tomato_scene.instantiate()
+				add_child(carrying_object)
+				carrying_object.position = Vector2(119, 46) # Misma posición que el Sprite2D del jugador
+				carrying_object.z_index = self.z_index + 1
+				print("Tomate instanciado como hijo del jugador en ", carrying_object.position)
+			elif can_pickup_meat:
+				print("Instanciando carne")
+				var meat_scene = preload("res://scenes/Carne.tscn")
+				carrying_object = meat_scene.instantiate()
+				add_child(carrying_object)
+				carrying_object.position = Vector2(119, 46) # Misma posición que el Sprite2D del jugador
+				carrying_object.z_index = self.z_index + 1
+				print("Carne instanciada como hijo del jugador en ", carrying_object.position)
+			elif can_pickup_lettuce:
+				print("Instanciando lechuga")
+				var lettuce_scene = preload("res://scenes/Lechuga.tscn")
+				carrying_object = lettuce_scene.instantiate()
+				add_child(carrying_object)
+				carrying_object.position = Vector2(119, 46)
+				carrying_object.z_index = self.z_index + 1
+				print("Lechuga instanciada como hijo del jugador en ", carrying_object.position)
+			elif can_pickup_cheese:
+				print("Instanciando queso")
+				var cheese_scene = preload("res://scenes/Queso.tscn")
+				carrying_object = cheese_scene.instantiate()
+				add_child(carrying_object)
+				carrying_object.position = Vector2(119, 46)
+				carrying_object.z_index = self.z_index + 1
+				print("Queso instanciado como hijo del jugador en ", carrying_object.position)
+			elif can_pickup_bread:
+				print("Instanciando pan")
+				var bread_scene = preload("res://scenes/Pan.tscn")
+				carrying_object = bread_scene.instantiate()
+				add_child(carrying_object)
+				carrying_object.position = Vector2(119, 46)
+				carrying_object.z_index = self.z_index + 1
+				print("Pan instanciado como hijo del jugador en ", carrying_object.position)
+		elif carrying_object != null and (can_pickup_tomato or can_pickup_meat or can_pickup_lettuce or can_pickup_cheese or can_pickup_bread):
+			print("Soltando objeto en el meson")
 			carrying_object.get_parent().remove_child(carrying_object)
 			get_parent().add_child(carrying_object)
 			carrying_object.position = pickup_area.global_position
-			print("Tomate soltado en ", carrying_object.position)
+			print("Objeto soltado en ", carrying_object.position)
 			carrying_object = null
 	# El tomate sigue al jugador automáticamente por ser hijo
 
 func _on_Area2D_body_entered(body):
 	print("\n=== Colisión detectada ===")
-	print("Entró al área: ", body.name)
-	print("Tipo de cuerpo:", body.get_class())
-	print("Grupos del cuerpo:", body.get_groups())
-	can_pickup = true
-	pickup_area = body.get_parent()
-	print("pickup_area asignada a:", pickup_area.name)
-	can_pickup_tomato = true
-	print("can_pickup_tomato =", can_pickup_tomato)
+	if body.is_in_group("player"):
+		print("Jugador entró al área de un mesón")
+		# La señal viene del Area2D del mesón, así que obtenemos el padre directamente
+		var meson = self.get_parent()
+		print("Nombre del mesón:", meson.name)
+		
+		# Solo permitir tomates en MesonPrep5
+		if meson.name == "MesonPrep5":
+			pickup_area = meson
+			can_pickup = true
+			can_pickup_tomato = true
+			can_pickup_meat = true # Permitir recoger carne también
+			can_pickup_lettuce = true # Permitir recoger lechuga
+			print("Es MesonPrep5 - Permitiendo interacción con tomates, carne y lechuga")
+		else:
+			can_pickup = false
+			can_pickup_tomato = false
+			can_pickup_meat = false # No permitir recoger carne
+			can_pickup_lettuce = false # No permitir recoger lechuga
+			print("No es MesonPrep5 - No se permite interacción con tomates")
 	print("========================\n")
 
 func _on_Area2D_body_exited(body):
@@ -141,4 +147,6 @@ func _on_Area2D_body_exited(body):
 	can_pickup = false
 	pickup_area = null
 	can_pickup_tomato = false
+	can_pickup_meat = false # Reiniciar también al salir
+	can_pickup_lettuce = false # Reiniciar también al salir
 	print("pickup_area liberada")

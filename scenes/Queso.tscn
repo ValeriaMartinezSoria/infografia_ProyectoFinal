@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bayo8fdxhcbwd"]
+
+[ext_resource type="Texture2D" uid="uid://c3ua6wxox2hjr" path="res://assets/queso.png" id="1_ijkl3"]
+
+[node name="Queso" type="Node2D"]
+scale = Vector2(0.09, 0.09)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ijkl3")

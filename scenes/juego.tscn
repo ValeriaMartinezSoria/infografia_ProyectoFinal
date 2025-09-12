@@ -38,7 +38,7 @@ texture = ExtResource("1_2ka1k")
 expand_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_nxr8p")]
-position = Vector2(303, 347)
+position = Vector2(360, 355)
 
 [node name="Hornilla1" parent="." instance=ExtResource("5_hornilla")]
 position = Vector2(391, 116)
@@ -61,23 +61,39 @@ position = Vector2(483, 504)
 scale = Vector2(0.35, 0.35)
 
 [node name="MesonPrep1" parent="." instance=ExtResource("7_prep")]
-position = Vector2(292, 312)
+position = Vector2(338, 174)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesonPrep2" parent="." instance=ExtResource("7_prep")]
-position = Vector2(5, 174)
+position = Vector2(270, 174)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesonPrep3" parent="." instance=ExtResource("7_prep")]
-position = Vector2(497, 335)
+position = Vector2(202, 174)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesonPrep4" parent="." instance=ExtResource("7_prep")]
-position = Vector2(57, 382)
+position = Vector2(134, 174)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesonPrep5" parent="." instance=ExtResource("7_prep")]
-position = Vector2(78, 175)
+position = Vector2(66, 174)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep6" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-2, 266)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep7" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-1, 351)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep8" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-1, 435)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep9" parent="." instance=ExtResource("7_prep")]
+position = Vector2(302, 352)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesaPlates" parent="." instance=ExtResource("8_plates")]
