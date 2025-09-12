@@ -1,9 +1,9 @@
-res://scenes/juego.tscn
+res://scripts/player.gd
 res://scenes/player.tscn
 res://scenes/hornilla.tscn
 res://scenes/mesa_paracortar.tscn
 res://scenes/main.tscn
 res://scenes/mesa_plates.tscn
 res://scenes/meson_prep.tscn
-res://scripts/player.gd
+res://scenes/juego.tscn
 res://scenes/Tomato.tscn
