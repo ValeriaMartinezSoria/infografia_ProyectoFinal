@@ -10,5 +10,5 @@ config_version=5
 
 [application]
 
-run/main_scene="uid://naoiv11gocvk"
-config/features=PackedStringArray("4.4")
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.3")
