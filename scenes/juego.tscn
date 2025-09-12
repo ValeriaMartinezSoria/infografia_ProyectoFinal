@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnbwfi65piakj"]
+[gd_scene load_steps=12 format=3 uid="uid://cnbwfi65piakj"]
 
 [ext_resource type="Texture2D" uid="uid://d3t732lh88026" path="res://assets/background_game.jpg" id="1_2ka1k"]
 [ext_resource type="PackedScene" uid="uid://c4mst2y6yq6jq" path="res://scenes/player.tscn" id="2_nxr8p"]
 [ext_resource type="AudioStream" uid="uid://b613nu1h5ws4r" path="res://audio/musica_fondo.mp3" id="4_pew7j"]
+[ext_resource type="PackedScene" uid="uid://dbop61rcx5wtm" path="res://scenes/hornilla.tscn" id="5_hornilla"]
+[ext_resource type="PackedScene" uid="uid://kjj0q0kcd7xq" path="res://scenes/mesa_paracortar.tscn" id="6_mesa"]
+[ext_resource type="PackedScene" uid="uid://bql80db4pjo7q" path="res://scenes/meson_prep.tscn" id="7_prep"]
+[ext_resource type="PackedScene" uid="uid://cobxyr8wdxob1" path="res://scenes/mesa_plates.tscn" id="8_plates"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ka1k"]
 size = Vector2(63, 483)
@@ -35,6 +39,50 @@ expand_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_nxr8p")]
 position = Vector2(303, 347)
+
+[node name="Hornilla1" parent="." instance=ExtResource("5_hornilla")]
+position = Vector2(391, 116)
+scale = Vector2(0.35, 0.35)
+
+[node name="Hornilla2" parent="." instance=ExtResource("5_hornilla")]
+position = Vector2(507, 116)
+scale = Vector2(0.35, 0.35)
+
+[node name="MesaCortar1" parent="." instance=ExtResource("6_mesa")]
+position = Vector2(208, 503)
+scale = Vector2(0.35, 0.35)
+
+[node name="MesaCortar2" parent="." instance=ExtResource("6_mesa")]
+position = Vector2(346, 504)
+scale = Vector2(0.35, 0.35)
+
+[node name="MesaCortar3" parent="." instance=ExtResource("6_mesa")]
+position = Vector2(483, 504)
+scale = Vector2(0.35, 0.35)
+
+[node name="MesonPrep1" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-1.99999, 321)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep2" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-1.99998, 250)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep3" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-3, 393)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep4" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-3, 465)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep5" parent="." instance=ExtResource("7_prep")]
+position = Vector2(78, 175)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesaPlates" parent="." instance=ExtResource("8_plates")]
+position = Vector2(173, 560)
+scale = Vector2(0.1, 0.1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_pew7j")
