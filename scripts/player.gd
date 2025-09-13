@@ -65,11 +65,33 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _process(_delta):
-	# Solo permitir agarrar tomate si está en MesonPrep5 y presiona 'G'
 	if Input.is_action_just_pressed("Grab"):
 		print("Presionaste Grab")
 		if carrying_object == null:
-			if can_pickup_tomato:
+			# Primero revisamos si estamos en un mesón de preparación con un ingrediente
+			if pickup_area and pickup_area.name in ["MesonPrep6", "MesonPrep7", "MesonPrep8", "MesonPrep9"] and pickup_area.has_ingredient:
+				print("Recogiendo ingrediente del mesón de preparación")
+				# Buscamos el ingrediente en la escena
+				var possible_ingredients = get_parent().get_children()
+				for child in possible_ingredients:
+					# Verificamos si es un ingrediente y está en la posición del mesón
+					if child is Node2D and (
+						child.name.begins_with("Tomato") or 
+						child.name.begins_with("Carne") or 
+						child.name.begins_with("Lechuga") or 
+						child.name.begins_with("Queso") or 
+						child.name.begins_with("Pan")):
+						if child.global_position.distance_to(pickup_area.global_position) < 50:  # Si está cerca del mesón
+							carrying_object = child
+							var global_pos = carrying_object.global_position
+							carrying_object.get_parent().remove_child(carrying_object)
+							add_child(carrying_object)
+							carrying_object.position = Vector2(119, 46)
+							carrying_object.z_index = self.z_index + 1
+							pickup_area.has_ingredient = false
+							print("Ingrediente recogido de", pickup_area.name)
+							break
+			elif can_pickup_tomato:
 				print("Instanciando tomate")
 				var tomato_scene = preload("res://scenes/Tomato.tscn")
 				carrying_object = tomato_scene.instantiate()
@@ -109,13 +131,32 @@ func _process(_delta):
 				carrying_object.position = Vector2(119, 46)
 				carrying_object.z_index = self.z_index + 1
 				print("Pan instanciado como hijo del jugador en ", carrying_object.position)
-		elif carrying_object != null and (can_pickup_tomato or can_pickup_meat or can_pickup_lettuce or can_pickup_cheese or can_pickup_bread):
-			print("Soltando objeto en el meson")
-			carrying_object.get_parent().remove_child(carrying_object)
-			get_parent().add_child(carrying_object)
-			carrying_object.position = pickup_area.global_position
-			print("Objeto soltado en ", carrying_object.position)
-			carrying_object = null
+		elif carrying_object != null and pickup_area != null and can_pickup:
+			var meson_name = pickup_area.name
+			# Si es un mesón de preparación (6-9)
+			if meson_name in ["MesonPrep6", "MesonPrep7", "MesonPrep8", "MesonPrep9"]:
+				if not pickup_area.has_ingredient:
+					print("Soltando objeto en el mesón de preparación")
+					# Guardamos la escala y posición global actual
+					var global_pos = carrying_object.global_position
+					carrying_object.get_parent().remove_child(carrying_object)
+					get_parent().add_child(carrying_object)  # Lo añadimos al nodo raíz primero
+					carrying_object.global_position = pickup_area.global_position  # Lo posicionamos en el centro del mesón
+					carrying_object.position.y -= 20  # Ajustamos un poco hacia arriba para que se vea bien
+					carrying_object.z_index = 10  # Aseguramos que esté por encima de todo
+					pickup_area.has_ingredient = true
+					carrying_object = null
+					print("Ingrediente colocado en el centro de", meson_name)
+				else:
+					print(meson_name, "ya tiene un ingrediente")
+			# Si es un mesón de ingredientes (1-5)
+			elif can_pickup_tomato or can_pickup_meat or can_pickup_lettuce or can_pickup_cheese or can_pickup_bread:
+				print("Soltando objeto en el mesón de ingredientes")
+				carrying_object.get_parent().remove_child(carrying_object)
+				get_parent().add_child(carrying_object)
+				carrying_object.position = pickup_area.global_position
+				carrying_object = null
+				print("Ingrediente devuelto al mesón original")
 	# El tomate sigue al jugador automáticamente por ser hijo
 
 func _on_Area2D_body_entered(body):
