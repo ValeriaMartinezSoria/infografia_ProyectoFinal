@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj8rhp530gt0l"]
+
+[ext_resource type="Texture2D" uid="uid://bmesp4k6kjg4l" path="res://assets/pan.png" id="1_efgh2"]
+
+[node name="Pan" type="Node2D"]
+scale = Vector2(0.075, 0.075)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_efgh2")

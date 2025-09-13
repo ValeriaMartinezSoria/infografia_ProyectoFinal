@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://naoiv11gocvk"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://bn2rpql8pbus1" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="Texture2D" uid="uid://cewuoo6j3y0kn" path="res://assets/overcooking.png" id="2_jyhfs"]
-[ext_resource type="Script" path="res://scripts/boton_inicio.gd" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://bdjcr01rvm4by" path="res://scripts/boton_inicio.gd" id="3_tbgi4"]
 [ext_resource type="AudioStream" uid="uid://b613nu1h5ws4r" path="res://audio/musica_fondo.mp3" id="4_jyhfs"]
 
 [node name="Main" type="Node2D"]
@@ -33,16 +33,16 @@ scale = Vector2(2, 2)
 theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0.211153, 0.468037, 0.201841, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.211153, 0.468037, 0.201841, 1)
 text = "JUGAR"
 icon_alignment = 1
 script = ExtResource("3_tbgi4")

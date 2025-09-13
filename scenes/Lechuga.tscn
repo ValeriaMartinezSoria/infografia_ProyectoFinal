@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsvf0nx41te0t"]
+
+[ext_resource type="Texture2D" uid="uid://7cpaj032r43s" path="res://assets/lechuga.png" id="1_mnop4"]
+
+[node name="Lechuga" type="Node2D"]
+scale = Vector2(0.065, 0.065)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mnop4")

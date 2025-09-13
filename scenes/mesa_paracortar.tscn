@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://kjj0q0kcd7xq"]
+
+[ext_resource type="Texture2D" uid="uid://crd7otqj3c0vs" path="res://assets/mesa_paracortar.png" id="1_mesa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ccplt"]
+radius = 168.0
+
+[node name="MesaParacortar" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(283, 261)
+texture = ExtResource("1_mesa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(284, 282)
+shape = SubResource("CircleShape2D_ccplt")

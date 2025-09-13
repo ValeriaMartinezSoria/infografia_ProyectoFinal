@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbop61rcx5wtm"]
+
+[ext_resource type="Texture2D" uid="uid://b638el067q8e5" path="res://assets/hornilla.png" id="1_hornilla"]
+
+[sub_resource type="RectangleShape2D" id="1_shape"]
+size = Vector2(313, 381)
+
+[node name="Hornilla" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(250, 250)
+texture = ExtResource("1_hornilla")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(250.5, 250.5)
+shape = SubResource("1_shape")
