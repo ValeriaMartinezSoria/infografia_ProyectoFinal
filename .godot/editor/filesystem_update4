@@ -10,5 +10,4 @@ res://scenes/meson_prep.tscn
 res://scenes/Pan.tscn
 res://scenes/Lechuga.tscn
 res://scenes/Carne.tscn
-res://scripts/meson_prep.gd
-res://scripts/player.gd
+res://scripts/pedidos_manager.gd

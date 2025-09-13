@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnbwfi65piakj"]
+[gd_scene load_steps=13 format=3 uid="uid://cnbwfi65piakj"]
 
 [ext_resource type="Texture2D" uid="uid://d3t732lh88026" path="res://assets/background_game.jpg" id="1_2ka1k"]
+[ext_resource type="Script" path="res://scripts/pedidos_manager.gd" id="2_m3p3p"]
 [ext_resource type="PackedScene" uid="uid://c4mst2y6yq6jq" path="res://scenes/player.tscn" id="2_nxr8p"]
 [ext_resource type="AudioStream" uid="uid://b613nu1h5ws4r" path="res://audio/musica_fondo.mp3" id="4_pew7j"]
 [ext_resource type="PackedScene" uid="uid://dbop61rcx5wtm" path="res://scenes/hornilla.tscn" id="5_hornilla"]
@@ -36,6 +37,46 @@ offset_right = 1159.0
 offset_bottom = 647.0
 texture = ExtResource("1_2ka1k")
 expand_mode = 1
+
+[node name="PedidosPanel1" type="Panel" parent="Control"]
+clip_contents = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 3.0
+offset_right = 453.0
+offset_bottom = 62.0
+script = ExtResource("2_m3p3p")
+
+[node name="PedidosHBox" type="HBoxContainer" parent="Control/PedidosPanel1"]
+clip_contents = true
+layout_mode = 0
+offset_right = 307.0
+offset_bottom = 69.0
+alignment = 1
+
+[node name="Timer" type="Timer" parent="Control/PedidosPanel1"]
+wait_time = 30.0
+autostart = true
+
+[node name="PedidosPanel2" type="Panel" parent="Control"]
+clip_contents = true
+layout_mode = 0
+offset_left = 17.0
+offset_top = 71.0
+offset_right = 454.0
+offset_bottom = 130.0
+script = ExtResource("2_m3p3p")
+
+[node name="PedidosHBox" type="HBoxContainer" parent="Control/PedidosPanel2"]
+clip_contents = true
+layout_mode = 0
+offset_right = 307.0
+offset_bottom = 69.0
+alignment = 1
+
+[node name="Timer" type="Timer" parent="Control/PedidosPanel2"]
+wait_time = 30.0
+autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_nxr8p")]
 position = Vector2(360, 355)
