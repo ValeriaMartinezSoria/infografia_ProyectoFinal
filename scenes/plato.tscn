@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8e3t8x6po1e6"]
+
+[ext_resource type="Script" uid="uid://bgyhldx7nveq8" path="res://scripts/plato.gd" id="1_k07k0"]
+[ext_resource type="Texture2D" uid="uid://cwakrxkwbe0y5" path="res://assets/plato.png" id="2_w454r"]
+
+[node name="Plato" type="Node2D"]
+script = ExtResource("1_k07k0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(653, 353)
+scale = Vector2(2.04, 1.868)
+texture = ExtResource("2_w454r")

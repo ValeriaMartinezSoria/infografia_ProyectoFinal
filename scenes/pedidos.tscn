@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://c40flbduh0kga"]
+
+[ext_resource type="Texture2D" uid="uid://d3t732lh88026" path="res://assets/background_game.jpg" id="1_ynqq7"]
+[ext_resource type="Script" uid="uid://cq1ok06eesc6o" path="res://scripts/pedidos_manager.gd" id="2_5s7rd"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -17.0
+offset_right = 1148.0
+offset_bottom = 634.0
+texture = ExtResource("1_ynqq7")
+expand_mode = 1
+
+[node name="PedidosPanel1" type="Panel" parent="."]
+clip_contents = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 3.0
+offset_right = 453.0
+offset_bottom = 62.0
+script = ExtResource("2_5s7rd")
+
+[node name="PedidosHBox" type="HBoxContainer" parent="PedidosPanel1"]
+clip_contents = true
+layout_mode = 0
+offset_right = 307.0
+offset_bottom = 69.0
+alignment = 1
+
+[node name="Timer" type="Timer" parent="PedidosPanel1"]
+wait_time = 30.0
+autostart = true
+
+[node name="PedidosPanel2" type="Panel" parent="."]
+clip_contents = true
+layout_mode = 0
+offset_left = 17.0
+offset_top = 71.0
+offset_right = 454.0
+offset_bottom = 130.0
+script = ExtResource("2_5s7rd")
+
+[node name="PedidosHBox" type="HBoxContainer" parent="PedidosPanel2"]
+clip_contents = true
+layout_mode = 0
+offset_right = 307.0
+offset_bottom = 69.0
+alignment = 1
+
+[node name="Timer" type="Timer" parent="PedidosPanel2"]
+wait_time = 30.0
+autostart = true
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1027.0
+offset_top = 115.0
+offset_right = 1099.0
+offset_bottom = 164.0
+text = "Puntos: 0
+"

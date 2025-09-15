@@ -1,0 +1,228 @@
+[gd_scene load_steps=14 format=3 uid="uid://cnbwfi65piakj"]
+
+[ext_resource type="PackedScene" uid="uid://c40flbduh0kga" path="res://scenes/pedidos.tscn" id="1_ebtnq"]
+[ext_resource type="PackedScene" uid="uid://c4mst2y6yq6jq" path="res://scenes/player.tscn" id="2_nxr8p"]
+[ext_resource type="AudioStream" uid="uid://b613nu1h5ws4r" path="res://audio/musica_fondo.mp3" id="4_pew7j"]
+[ext_resource type="PackedScene" uid="uid://dbop61rcx5wtm" path="res://scenes/hornilla.tscn" id="5_hornilla"]
+[ext_resource type="PackedScene" uid="uid://kjj0q0kcd7xq" path="res://scenes/mesa_paracortar.tscn" id="6_mesa"]
+[ext_resource type="PackedScene" uid="uid://bhsn4mi11soq4" path="res://scenes/meson_prep.tscn" id="7_prep"]
+[ext_resource type="Script" uid="uid://dvndwjki6l2go" path="res://scripts/gamecontroller.gd" id="8_5g1u2"]
+[ext_resource type="PackedScene" uid="uid://cobxyr8wdxob1" path="res://scenes/mesa_plates.tscn" id="8_plates"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ka1k"]
+size = Vector2(63, 483)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmti5"]
+size = Vector2(23, 661)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vych7"]
+size = Vector2(1255, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqw7"]
+size = Vector2(56.75, 56.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebtnq"]
+size = Vector2(95, 482)
+
+[node name="Juego" type="Node2D"]
+
+[node name="Control" parent="." instance=ExtResource("1_ebtnq")]
+
+[node name="Player" parent="." instance=ExtResource("2_nxr8p")]
+position = Vector2(360, 355)
+
+[node name="Hornilla1" parent="." instance=ExtResource("5_hornilla")]
+position = Vector2(391, 116)
+scale = Vector2(0.35, 0.35)
+
+[node name="Hornilla2" parent="." instance=ExtResource("5_hornilla")]
+position = Vector2(507, 116)
+scale = Vector2(0.35, 0.35)
+
+[node name="MesaCortar1" parent="." instance=ExtResource("6_mesa")]
+position = Vector2(208, 503)
+scale = Vector2(0.35, 0.35)
+
+[node name="MesaCortar2" parent="." instance=ExtResource("6_mesa")]
+position = Vector2(346, 504)
+scale = Vector2(0.35, 0.35)
+
+[node name="MesaCortar3" parent="." instance=ExtResource("6_mesa")]
+position = Vector2(483, 504)
+scale = Vector2(0.35, 0.35)
+
+[node name="MesonPrep1" parent="." instance=ExtResource("7_prep")]
+position = Vector2(338, 174)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep2" parent="." instance=ExtResource("7_prep")]
+position = Vector2(270, 174)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep3" parent="." instance=ExtResource("7_prep")]
+position = Vector2(202, 174)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep4" parent="." instance=ExtResource("7_prep")]
+position = Vector2(134, 174)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep5" parent="." instance=ExtResource("7_prep")]
+position = Vector2(66, 174)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep6" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-2, 266)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep7" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-1, 351)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep8" parent="." instance=ExtResource("7_prep")]
+position = Vector2(-1, 435)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesonPrep9" parent="." instance=ExtResource("7_prep")]
+position = Vector2(302, 352)
+scale = Vector2(0.2, 0.2)
+
+[node name="MesaPlates" parent="." instance=ExtResource("8_plates")]
+position = Vector2(27, 573)
+scale = Vector2(0.1, 0.1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pew7j")
+autoplay = true
+
+[node name="ServStation3" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ServStation3"]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(685, 407.5)
+shape = SubResource("RectangleShape2D_2ka1k")
+
+[node name="P_izquierda" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P_izquierda"]
+position = Vector2(3.5, 326.5)
+shape = SubResource("RectangleShape2D_vmti5")
+debug_color = Color(0.896773, 0.000196181, 0.774064, 0.42)
+
+[node name="P_derecha" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P_derecha"]
+position = Vector2(1176, 320)
+shape = SubResource("RectangleShape2D_vmti5")
+debug_color = Color(0.896773, 0.000196181, 0.774064, 0.42)
+
+[node name="P_abajo" type="StaticBody2D" parent="."]
+position = Vector2(340, 857)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P_abajo"]
+position = Vector2(254, -217)
+shape = SubResource("RectangleShape2D_vych7")
+
+[node name="P_arriba" type="StaticBody2D" parent="."]
+position = Vector2(340, 857)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P_arriba"]
+position = Vector2(269, -847)
+shape = SubResource("RectangleShape2D_vych7")
+
+[node name="Tomate" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tomate"]
+position = Vector2(126, 167)
+shape = SubResource("RectangleShape2D_jbqw7")
+
+[node name="Carne" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Carne"]
+position = Vector2(191, 166)
+shape = SubResource("RectangleShape2D_jbqw7")
+
+[node name="Lechuga" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lechuga"]
+position = Vector2(257, 165)
+shape = SubResource("RectangleShape2D_jbqw7")
+
+[node name="Queso" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Queso"]
+position = Vector2(328, 166)
+shape = SubResource("RectangleShape2D_jbqw7")
+
+[node name="Pan" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pan"]
+position = Vector2(391, 165)
+shape = SubResource("RectangleShape2D_jbqw7")
+
+[node name="ServStation" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ServStation"]
+position = Vector2(681.5, 411)
+shape = SubResource("RectangleShape2D_ebtnq")
+debug_color = Color(0.689706, 0.498272, 0, 0.42)
+
+[node name="GameController" type="Node2D" parent="."]
+script = ExtResource("8_5g1u2")
+
+[node name="Timer" type="Timer" parent="GameController"]
+
+[node name="TimerLabel" type="Label" parent="GameController"]
+offset_left = 1023.0
+offset_top = 44.0
+offset_right = 1144.0
+offset_bottom = 118.0
+
+[node name="GameOverPanel" type="Panel" parent="GameController"]
+visible = false
+offset_left = 269.0
+offset_top = 137.0
+offset_right = 780.0
+offset_bottom = 452.0
+
+[node name="Label" type="Label" parent="GameController/GameOverPanel"]
+visible = false
+layout_mode = 0
+offset_left = 31.0
+offset_top = 52.0
+offset_right = 278.0
+offset_bottom = 75.0
+scale = Vector2(3, 3)
+text = "Se acabo el tiempo!!"
+
+[node name="RetryButton" type="Button" parent="GameController/GameOverPanel"]
+visible = false
+layout_mode = 0
+offset_left = 51.0
+offset_top = 179.0
+offset_right = 455.0
+offset_bottom = 271.0
+text = "Reintentar"
+
+[connection signal="pressed" from="GameController/GameOverPanel/RetryButton" to="GameController" method="_on_retry_button_pressed"]
