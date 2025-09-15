@@ -1,3 +1,4 @@
+Area2D
 Label
 Control
 Button
@@ -5,7 +6,6 @@ Panel
 Timer
 Node2D
 CollisionShape2D
-Area2D
 Sprite2D
 HBoxContainer
 StaticBody2D

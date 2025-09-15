@@ -14,11 +14,15 @@ var can_pickup_cheese = false
 var can_pickup_bread = false
 var score = 0
 
+var can_cut: bool = false
+var cutting_station = null
+var _cut_timer: float = 0.0
+const CUT_REQUIRED: float = 2.0
+
+var hold_offset: Vector2 = Vector2(0, -10)
+
 func _ready():
-	print("\n=== Inicializando Player ===")
 	add_to_group("player")
-	print("Nodo actual:", name)
-	print("=== Inicialización completada ===\n")
 
 func _physics_process(_delta):
 	var dir = Vector2.ZERO
@@ -55,24 +59,15 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _process(_delta):
-	# Recoger o colocar ingredientes/platos
 	if Input.is_action_just_pressed("Grab") and pickup_area != null:
 		if carrying_object == null:
-			# Recoger ingrediente
 			if pickup_area.name in ["MesonPrep6","MesonPrep7","MesonPrep8","MesonPrep9"] and pickup_area.has_ingredient:
 				for child in get_parent().get_children():
-					if child is Node2D and (
-						child.name.begins_with("Tomato") or
-						child.name.begins_with("Carne") or
-						child.name.begins_with("Lechuga") or
-						child.name.begins_with("Queso") or
-						child.name.begins_with("Pan")
-					):
+					if child is Node2D and (child.name.begins_with("Tomato") or child.name.begins_with("Carne") or child.name.begins_with("Lechuga") or child.name.begins_with("Queso") or child.name.begins_with("Pan")):
 						if child.global_position.distance_to(pickup_area.global_position) < 50:
 							_pickup_object(child)
 							pickup_area.has_ingredient = false
 							break
-			# Generar ingredientes desde mesones 1-5
 			elif can_pickup_tomato:
 				_spawn_ingredient("res://scenes/Tomato.tscn")
 			elif can_pickup_meat:
@@ -84,12 +79,9 @@ func _process(_delta):
 			elif can_pickup_bread:
 				_spawn_ingredient("res://scenes/Pan.tscn")
 		else:
-			# Soltar ingrediente/plato
-			if pickup_area != null:
-				var target = pickup_area.current_object if pickup_area.current_object != null else pickup_area
-				_drop_object(target)
+			var target = pickup_area.current_object if pickup_area.current_object != null else pickup_area
+			_drop_object(target)
 
-	# Instanciar plato
 	if Input.is_action_just_pressed("instantiate_plate") and pickup_area != null and pickup_area.name in ["MesonPrep6","MesonPrep7","MesonPrep8","MesonPrep9"]:
 		if pickup_area.current_object == null or not pickup_area.current_object.name.begins_with("Plato"):
 			var plato_scene: PackedScene = preload("res://scenes/Plato.tscn")
@@ -100,83 +92,77 @@ func _process(_delta):
 			plato_instance.visible = true
 			pickup_area.current_object = plato_instance
 			pickup_area.has_ingredient = true
-			print("🍽 Plato instanciado en mesón:", pickup_area.name)
 
-	# Recoger plato del mesón
 	if Input.is_action_just_pressed("ui_select") and pickup_area != null:
 		if carrying_object == null:
 			if pickup_area.current_object != null and pickup_area.current_object.name.begins_with("Plato"):
 				_pickup_object(pickup_area.current_object)
 				pickup_area.current_object = null
 				pickup_area.has_ingredient = false
-				print("Plato recogido del mesón:", pickup_area.name)
 
-	# Servir plato
 	if Input.is_action_just_pressed("ServeButton"):
 		if carrying_object != null and carrying_object.name.begins_with("Plato"):
 			var root_scene = get_tree().current_scene
 			var pedidos_manager1 = root_scene.get_node_or_null("Control/PedidosPanel1")
 			var pedidos_manager2 = root_scene.get_node_or_null("Control/PedidosPanel2")
 			var score_label = root_scene.get_node_or_null("Control/ScoreLabel")
-
 			var pedido_valido = false
 
-		# --- Validar en el primer panel ---
 			if pedidos_manager1 != null:
 				if pedidos_manager1.validate_order(carrying_object):
 					pedido_valido = true
-			else:
-				print("⚠️ ERROR: No se encontró PedidosPanel1")
-
-		# --- Validar en el segundo panel ---
 			if pedidos_manager2 != null:
 				if !pedido_valido and pedidos_manager2.validate_order(carrying_object):
 					pedido_valido = true
-			else:
-				print("⚠️ ERROR: No se encontró PedidosPanel2")
 
-		# --- Resultado ---
 			if pedido_valido:
-				print("✅ Pedido correcto! 🎉")
 				score += 10
 			else:
-				print("😢 Pedido incorrecto")
 				score -= 10
 
-		# Actualizar label del puntaje
 			if score_label != null:
 				score_label.text = str(score)
 
-		# Liberar plato solo si existe
 			if carrying_object != null:
 				carrying_object.queue_free()
 				carrying_object = null
-	else:
-		print("⚠️ No llevas un plato para servir")
 
-# --- Funciones auxiliares ---
+	if can_cut and carrying_object != null and (carrying_object.name.begins_with("Tomato") or carrying_object.name.begins_with("Lechuga")):
+		if Input.is_action_pressed("cut"):
+			_cut_timer += _delta
+			if _cut_timer >= CUT_REQUIRED:
+				if carrying_object.has_method("cut"):
+					carrying_object.cut()
+				else:
+					var spr = carrying_object.get_node_or_null("Sprite2D")
+					if spr:
+						spr.modulate = Color(1, 0.6, 0.6)
+				carrying_object.set_meta("is_cut", true)
+				_cut_timer = 0.0
+		else:
+			_cut_timer = 0.0
+	else:
+		_cut_timer = 0.0
+
 func _pickup_object(obj: Node2D):
 	carrying_object = obj
 	if carrying_object.get_parent() != null:
 		carrying_object.get_parent().remove_child(carrying_object)
 	add_child(carrying_object)
-	carrying_object.position = Vector2(0, -20)
+	carrying_object.position = hold_offset
 	carrying_object.z_index = 50
-	print("Objeto recogido:", carrying_object.name)
 
 func _spawn_ingredient(path:String):
 	var scene: PackedScene = load(path)
 	var ingredient = scene.instantiate()
 	_pickup_object(ingredient)
-	print("Ingrediente instanciado:", ingredient.name)
 
 func _drop_object(target):
 	if carrying_object == null:
 		return
 	if carrying_object.get_parent() != null:
 		carrying_object.get_parent().remove_child(carrying_object)
-
-	if target.has_method("add_ingredient"): 
+	if target.has_method("add_ingredient"):
 		target.add_ingredient(carrying_object)
 	else:
 		target.add_child(carrying_object)

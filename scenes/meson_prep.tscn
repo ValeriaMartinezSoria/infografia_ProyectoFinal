@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhsn4mi11soq4"]
 
 [ext_resource type="Texture2D" uid="uid://cf0g3n2x5vvaj" path="res://assets/meson_paraingredientes.png" id="1_meson_prep"]
-[ext_resource type="Script" uid="uid://dkhgy1qy34inw" path="res://scripts/meson_prep.gd" id="1_t6evc"]
+[ext_resource type="Script" path="res://scripts/meson_prep.gd" id="1_t6evc"]
 
 [sub_resource type="RectangleShape2D" id="shape_area"]
 size = Vector2(339, 339)

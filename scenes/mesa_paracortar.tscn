@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://kjj0q0kcd7xq"]
+[gd_scene load_steps=5 format=3 uid="uid://kjj0q0kcd7xq"]
 
 [ext_resource type="Texture2D" uid="uid://crd7otqj3c0vs" path="res://assets/mesa_paracortar.png" id="1_mesa"]
+[ext_resource type="Script" path="res://scripts/mesa_paracortar.gd" id="2_script"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ccplt"]
 radius = 168.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_area"]
+radius = 184.003
+
 [node name="MesaParacortar" type="Node2D"]
+script = ExtResource("2_script")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -18,3 +23,11 @@ texture = ExtResource("1_mesa")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(284, 282)
 shape = SubResource("CircleShape2D_ccplt")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Area2D#CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(283, 242)
+shape = SubResource("CircleShape2D_area")

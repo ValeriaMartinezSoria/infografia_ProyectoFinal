@@ -11,11 +11,8 @@ res://scenes/Pan.tscn
 res://scenes/Lechuga.tscn
 res://scenes/Carne.tscn
 res://scenes/plato.tscn
-res://scripts/meson_prep.gd
-res://scripts/player.gd
-res://scripts/pedidos_manager.gd
-res://scripts/plato.gd
-res://scripts/mesa_cortar.tscn
 res://scenes/mesa_cortar.tscn
-res://pedidos.tscn
-res://scenes/gamecontroller.gd
+res://scenes/pedidos.tscn
+res://scripts/ingredient.gd
+res://scripts/mesa_paracortar.gd
+res://scripts/player.gd

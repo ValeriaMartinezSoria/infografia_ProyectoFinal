@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c40flbduh0kga"]
 
 [ext_resource type="Texture2D" uid="uid://d3t732lh88026" path="res://assets/background_game.jpg" id="1_ynqq7"]
-[ext_resource type="Script" uid="uid://cq1ok06eesc6o" path="res://scripts/pedidos_manager.gd" id="2_5s7rd"]
+[ext_resource type="Script" path="res://scripts/pedidos_manager.gd" id="2_5s7rd"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
