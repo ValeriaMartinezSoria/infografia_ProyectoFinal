@@ -1,9 +1,13 @@
 extends Node2D
 
-@export var game_time_seconds: int = 120  # 2 minutos
+@export var game_time_seconds: int = 120  
 var time_left: int
 @onready var timer_label: Label = $TimerLabel
 @onready var timer: Timer = $Timer
+
+
+var score: int = 0
+var pedidos: Array = []  
 
 func _ready():
 	time_left = game_time_seconds
@@ -33,3 +37,31 @@ func _update_ui():
 func _pause_game():
 	print("⏰ Tiempo terminado! Juego pausado")
 	get_tree().paused = true
+
+
+func entregar_pedido(plato) -> void:
+	if pedidos.is_empty():
+		print("⚠️ No hay pedidos activos")
+		return
+
+	var pedido_actual = pedidos[0] 
+	var ingredientes = plato.get_ingredientes()
+
+	var valido = true
+	for req in pedido_actual:
+		var encontrado = false
+		for ing in ingredientes:
+			if ing.name == req and ing.is_cut:
+				encontrado = true
+				break
+		if not encontrado:
+			valido = false
+			break
+
+	if valido:
+		score += 10
+		print("✅ Cliente feliz! +10 puntos. Puntaje:", score)
+	else:
+		print("❌ El cliente no quedó satisfecho...")
+
+	pedidos.pop_front()

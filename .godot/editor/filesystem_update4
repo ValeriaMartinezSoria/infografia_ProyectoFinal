@@ -1,4 +1,5 @@
 res://scenes/player.tscn
+res://scripts/gamecontroller.gd
 res://scenes/hornilla.tscn
 res://scenes/mesa_paracortar.tscn
 res://scenes/main.tscn
@@ -13,6 +14,3 @@ res://scenes/Carne.tscn
 res://scenes/plato.tscn
 res://scenes/mesa_cortar.tscn
 res://scenes/pedidos.tscn
-res://scripts/ingredient.gd
-res://scripts/mesa_paracortar.gd
-res://scripts/player.gd
