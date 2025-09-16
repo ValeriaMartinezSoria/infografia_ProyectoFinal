@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxfxobhhfu0fk"]
+[gd_scene load_steps=3 format=3 uid="uid://bxfxobhhfu0fk"]
 
 [ext_resource type="Texture2D" uid="uid://bj5s0rwcpw04t" path="res://assets/carne.png" id="1_abcd1"]
+[ext_resource type="Script" uid="uid://dgr1s5u15g48p" path="res://scripts/ingredient.gd" id="1_lmfjr"]
 
 [node name="Carne" type="Node2D"]
 scale = Vector2(0.09, 0.09)
+script = ExtResource("1_lmfjr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(854.167, 5037.5)

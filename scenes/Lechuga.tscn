@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsvf0nx41te0t"]
 
-[ext_resource type="Script" path="res://scripts/ingredient.gd" id="1_imi6i"]
+[ext_resource type="Script" uid="uid://dgr1s5u15g48p" path="res://scripts/ingredient.gd" id="1_imi6i"]
 [ext_resource type="Texture2D" uid="uid://7cpaj032r43s" path="res://assets/lechuga.png" id="1_mnop4"]
 
 [node name="Lechuga" type="Node2D"]

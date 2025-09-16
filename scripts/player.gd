@@ -19,6 +19,12 @@ var cutting_station = null
 var _cut_timer: float = 0.0
 const CUT_REQUIRED: float = 2.0
 
+var can_cook: bool = false
+var cooking_station = null
+var _cook_timer: float = 0.0
+const COOK_REQUIRED: float = 3.0
+
+
 var hold_offset: Vector2 = Vector2(0, -10)
 
 func _ready():
@@ -143,6 +149,24 @@ func _process(_delta):
 			_cut_timer = 0.0
 	else:
 		_cut_timer = 0.0
+	if can_cook and carrying_object != null and carrying_object.name.begins_with("Carne"):
+		if Input.is_action_pressed("cook"):
+			_cook_timer += _delta
+			if _cook_timer >= COOK_REQUIRED:
+				# Ejemplo de "cocinado": cambiar color o marcar meta
+				if carrying_object.has_method("cook"):
+					carrying_object.cook()
+				else:
+					var spr = carrying_object.get_node_or_null("Sprite2D")
+					if spr:
+						spr.modulate = Color(0.8, 0.4, 0.1) # carne dorada
+				carrying_object.set_meta("is_cooked", true)
+				_cook_timer = 0.0
+		else:
+			_cook_timer = 0.0
+	else:
+		_cook_timer = 0.0
+
 
 func _pickup_object(obj: Node2D):
 	carrying_object = obj

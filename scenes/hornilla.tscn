@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbop61rcx5wtm"]
+[gd_scene load_steps=5 format=3 uid="uid://dbop61rcx5wtm"]
 
 [ext_resource type="Texture2D" uid="uid://b638el067q8e5" path="res://assets/hornilla.png" id="1_hornilla"]
+[ext_resource type="Script" uid="uid://dtxs4am6biv6l" path="res://scenes/hornilla.gd" id="1_uv12m"]
 
 [sub_resource type="RectangleShape2D" id="1_shape"]
 size = Vector2(313, 381)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0b6hl"]
+size = Vector2(324, 397)
+
 [node name="Hornilla" type="Node2D"]
+script = ExtResource("1_uv12m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -18,3 +23,12 @@ texture = ExtResource("1_hornilla")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(250.5, 250.5)
 shape = SubResource("1_shape")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Area2D#CollisionShape2d" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(253, 255.5)
+shape = SubResource("RectangleShape2D_0b6hl")
+debug_color = Color(0.903321, 0.22404, 0.53465, 0.42)

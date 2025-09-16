@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfcvlcv13desu"]
 
-[ext_resource type="Script" path="res://scripts/ingredient.gd" id="1_r2a76"]
+[ext_resource type="Script" uid="uid://dgr1s5u15g48p" path="res://scripts/ingredient.gd" id="1_r2a76"]
 [ext_resource type="Texture2D" uid="uid://dncptcg82vina" path="res://assets/tomate.png" id="1_tomato"]
 
 [node name="Tomato" type="Node2D"]
