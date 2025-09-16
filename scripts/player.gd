@@ -72,31 +72,32 @@ func _process(_delta):
 	# --- Recoger o soltar ingredientes ---
 	if Input.is_action_just_pressed("Grab") and pickup_area != null:
 		if carrying_object == null:
-			# --- Si hay un objeto en el mesón, levantarlo ---
-			if pickup_area.current_object != null:
-				var obj = pickup_area.current_object
-				_pickup_object(obj)
-				pickup_area.current_object = null
+			# Permitir agarrar ingrediente suelto de meson_prep (sin plato)
+			if pickup_area.plato_instance == null and pickup_area.current_object != null:
+				var ingredient = pickup_area.current_object
+				pickup_area.remove_child(ingredient)
+				add_child(ingredient)
+				carrying_object = ingredient
+				ingredient.position = hold_offset
 				pickup_area.has_ingredient = false
-			else:
-				# --- Si hay ingrediente suelto sobre mesón ---
-				if pickup_area.name.begins_with("MesonPrep") and pickup_area.has_ingredient:
-					for child in get_parent().get_children():
-						if child is Node2D and (child.name.begins_with("Tomato") or child.name.begins_with("Carne") or child.name.begins_with("Lechuga") or child.name.begins_with("Queso") or child.name.begins_with("Pan")):
-							if child.global_position.distance_to(pickup_area.global_position) < 50:
-								_pickup_object(child)
-								pickup_area.has_ingredient = false
-								break
-				elif can_pickup_tomato:
-					_spawn_ingredient("res://scenes/Tomato.tscn")
-				elif can_pickup_meat:
-					_spawn_ingredient("res://scenes/Carne.tscn")
-				elif can_pickup_lettuce:
-					_spawn_ingredient("res://scenes/Lechuga.tscn")
-				elif can_pickup_cheese:
-					_spawn_ingredient("res://scenes/Queso.tscn")
-				elif can_pickup_bread:
-					_spawn_ingredient("res://scenes/Pan.tscn")
+				pickup_area.current_object = null
+			elif pickup_area.name in ["MesonPrep6","MesonPrep7","MesonPrep8","MesonPrep9"] and pickup_area.has_ingredient:
+				for child in get_parent().get_children():
+					if child is Node2D and (child.name.begins_with("Tomato") or child.name.begins_with("Carne") or child.name.begins_with("Lechuga") or child.name.begins_with("Queso") or child.name.begins_with("Pan")):
+						if child.global_position.distance_to(pickup_area.global_position) < 50:
+							_pickup_object(child)
+							pickup_area.has_ingredient = false
+							break
+			elif can_pickup_tomato:
+				_spawn_ingredient("res://scenes/Tomato.tscn")
+			elif can_pickup_meat:
+				_spawn_ingredient("res://scenes/Carne.tscn")
+			elif can_pickup_lettuce:
+				_spawn_ingredient("res://scenes/Lechuga.tscn")
+			elif can_pickup_cheese:
+				_spawn_ingredient("res://scenes/Queso.tscn")
+			elif can_pickup_bread:
+				_spawn_ingredient("res://scenes/Pan.tscn")
 		else:
 			var target = pickup_area.current_object if pickup_area.current_object != null else pickup_area
 			_drop_object(target)

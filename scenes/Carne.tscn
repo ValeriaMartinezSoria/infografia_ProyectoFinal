@@ -8,6 +8,6 @@ scale = Vector2(0.09, 0.09)
 script = ExtResource("1_lmfjr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(854.167, 5037.5)
+position = Vector2(6177.78, 3755.56)
 scale = Vector2(1.56111, 1.49444)
 texture = ExtResource("1_abcd1")

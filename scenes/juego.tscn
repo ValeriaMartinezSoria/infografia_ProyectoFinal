@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dbop61rcx5wtm" path="res://scenes/hornilla.tscn" id="5_hornilla"]
 [ext_resource type="PackedScene" uid="uid://kjj0q0kcd7xq" path="res://scenes/mesa_paracortar.tscn" id="6_mesa"]
 [ext_resource type="PackedScene" uid="uid://bhsn4mi11soq4" path="res://scenes/meson_prep.tscn" id="7_prep"]
-[ext_resource type="Script" path="res://scripts/gamecontroller.gd" id="8_5g1u2"]
+[ext_resource type="Script" uid="uid://dvndwjki6l2go" path="res://scripts/gamecontroller.gd" id="8_5g1u2"]
 [ext_resource type="PackedScene" uid="uid://cobxyr8wdxob1" path="res://scenes/mesa_plates.tscn" id="8_plates"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ka1k"]

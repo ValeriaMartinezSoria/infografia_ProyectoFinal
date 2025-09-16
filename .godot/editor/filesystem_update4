@@ -12,5 +12,6 @@ res://scenes/Lechuga.tscn
 res://scenes/Carne.tscn
 res://scenes/plato.tscn
 res://scenes/mesa_cortar.tscn
+res://scripts/plato.gd
+res://scripts/meson_prep.gd
 res://scripts/player.gd
-res://scenes/pedidos.tscn
