@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c40flbduh0kga"]
 
 [ext_resource type="Texture2D" uid="uid://d3t732lh88026" path="res://assets/background_game.jpg" id="1_ynqq7"]
-[ext_resource type="Script" path="res://scripts/pedidos_manager.gd" id="2_5s7rd"]
+[ext_resource type="Script" uid="uid://cq1ok06eesc6o" path="res://scripts/pedidos_manager.gd" id="2_5s7rd"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -21,17 +21,19 @@ expand_mode = 1
 [node name="PedidosPanel1" type="Panel" parent="."]
 clip_contents = true
 layout_mode = 0
-offset_left = 16.0
-offset_top = 3.0
-offset_right = 453.0
-offset_bottom = 62.0
+offset_left = 198.0
+offset_top = -1.0
+offset_right = 669.0
+offset_bottom = 58.0
 script = ExtResource("2_5s7rd")
 
 [node name="PedidosHBox" type="HBoxContainer" parent="PedidosPanel1"]
 clip_contents = true
 layout_mode = 0
-offset_right = 307.0
-offset_bottom = 69.0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 463.0
+offset_bottom = 56.0
 alignment = 1
 
 [node name="Timer" type="Timer" parent="PedidosPanel1"]
@@ -41,17 +43,19 @@ autostart = true
 [node name="PedidosPanel2" type="Panel" parent="."]
 clip_contents = true
 layout_mode = 0
-offset_left = 17.0
-offset_top = 71.0
-offset_right = 454.0
-offset_bottom = 130.0
+offset_left = 198.0
+offset_top = 67.0
+offset_right = 665.0
+offset_bottom = 126.0
 script = ExtResource("2_5s7rd")
 
 [node name="PedidosHBox" type="HBoxContainer" parent="PedidosPanel2"]
 clip_contents = true
 layout_mode = 0
-offset_right = 307.0
-offset_bottom = 69.0
+offset_left = 18.0
+offset_top = 1.0
+offset_right = 430.0
+offset_bottom = 57.0
 alignment = 1
 
 [node name="Timer" type="Timer" parent="PedidosPanel2"]
@@ -60,9 +64,41 @@ autostart = true
 
 [node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1027.0
-offset_top = 115.0
-offset_right = 1099.0
-offset_bottom = 164.0
+offset_left = 926.0
+offset_top = 105.0
+offset_right = 1023.0
+offset_bottom = 169.0
+scale = Vector2(3, 3)
 text = "Puntos: 0
 "
+
+[node name="Panel" type="Panel" parent="ScoreLabel"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 3.0
+offset_right = 73.0
+offset_bottom = 21.0
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 33.0
+offset_top = 8.0
+offset_right = 106.0
+offset_bottom = 31.0
+scale = Vector2(2, 2)
+text = "PEDIDOS:"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 712.0
+offset_top = 173.0
+offset_right = 975.0
+offset_bottom = 340.0
+scale = Vector2(0.8, 0.8)
+text = "G → Recoger / dejar ingrediente 
+Q → Cortar vegetales 
+C → Cocinar en la hornilla 
+P→ Poner plato en meson
+\"espacio\"→recoger plato
+S → Servir el plato al cliente "

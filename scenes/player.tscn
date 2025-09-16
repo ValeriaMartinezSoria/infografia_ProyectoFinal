@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4mst2y6yq6jq"]
+[gd_scene load_steps=12 format=3 uid="uid://c4mst2y6yq6jq"]
 
 [ext_resource type="Texture2D" uid="uid://cvr150om88p47" path="res://assets/chefSprites.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dq4c7ydhgf36s" path="res://scripts/player.gd" id="2_player"]
+[ext_resource type="AudioStream" uid="uid://bwkaqdq46eom2" path="res://audio/cortar.mp3" id="3_dqkch"]
+[ext_resource type="AudioStream" uid="uid://dmmdq8hhkonn5" path="res://audio/coser_carne.mp3" id="4_qlg0r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 41.0
@@ -121,3 +123,10 @@ root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_qhqgy")
 }
+
+[node name="CutSound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("3_dqkch")
+
+[node name="CookSound" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("4_qlg0r")
+parameters/looping = true

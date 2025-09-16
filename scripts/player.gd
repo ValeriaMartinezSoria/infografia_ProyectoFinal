@@ -18,11 +18,15 @@ var can_cut: bool = false
 var cutting_station = null
 var _cut_timer: float = 0.0
 const CUT_REQUIRED: float = 2.0
+@onready var cut_sound = $CutSound
+
+
 
 var can_cook: bool = false
 var cooking_station = null
 var _cook_timer: float = 0.0
 const COOK_REQUIRED: float = 3.0
+@onready var cook_sound = $CookSound
 
 
 var hold_offset: Vector2 = Vector2(0, -10)
@@ -65,30 +69,40 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _process(_delta):
+	# --- Recoger o soltar ingredientes ---
 	if Input.is_action_just_pressed("Grab") and pickup_area != null:
 		if carrying_object == null:
-			if pickup_area.name in ["MesonPrep6","MesonPrep7","MesonPrep8","MesonPrep9"] and pickup_area.has_ingredient:
-				for child in get_parent().get_children():
-					if child is Node2D and (child.name.begins_with("Tomato") or child.name.begins_with("Carne") or child.name.begins_with("Lechuga") or child.name.begins_with("Queso") or child.name.begins_with("Pan")):
-						if child.global_position.distance_to(pickup_area.global_position) < 50:
-							_pickup_object(child)
-							pickup_area.has_ingredient = false
-							break
-			elif can_pickup_tomato:
-				_spawn_ingredient("res://scenes/Tomato.tscn")
-			elif can_pickup_meat:
-				_spawn_ingredient("res://scenes/Carne.tscn")
-			elif can_pickup_lettuce:
-				_spawn_ingredient("res://scenes/Lechuga.tscn")
-			elif can_pickup_cheese:
-				_spawn_ingredient("res://scenes/Queso.tscn")
-			elif can_pickup_bread:
-				_spawn_ingredient("res://scenes/Pan.tscn")
+			# --- Si hay un objeto en el mesón, levantarlo ---
+			if pickup_area.current_object != null:
+				var obj = pickup_area.current_object
+				_pickup_object(obj)
+				pickup_area.current_object = null
+				pickup_area.has_ingredient = false
+			else:
+				# --- Si hay ingrediente suelto sobre mesón ---
+				if pickup_area.name.begins_with("MesonPrep") and pickup_area.has_ingredient:
+					for child in get_parent().get_children():
+						if child is Node2D and (child.name.begins_with("Tomato") or child.name.begins_with("Carne") or child.name.begins_with("Lechuga") or child.name.begins_with("Queso") or child.name.begins_with("Pan")):
+							if child.global_position.distance_to(pickup_area.global_position) < 50:
+								_pickup_object(child)
+								pickup_area.has_ingredient = false
+								break
+				elif can_pickup_tomato:
+					_spawn_ingredient("res://scenes/Tomato.tscn")
+				elif can_pickup_meat:
+					_spawn_ingredient("res://scenes/Carne.tscn")
+				elif can_pickup_lettuce:
+					_spawn_ingredient("res://scenes/Lechuga.tscn")
+				elif can_pickup_cheese:
+					_spawn_ingredient("res://scenes/Queso.tscn")
+				elif can_pickup_bread:
+					_spawn_ingredient("res://scenes/Pan.tscn")
 		else:
 			var target = pickup_area.current_object if pickup_area.current_object != null else pickup_area
 			_drop_object(target)
 
-	if Input.is_action_just_pressed("instantiate_plate") and pickup_area != null and pickup_area.name in ["MesonPrep6","MesonPrep7","MesonPrep8","MesonPrep9"]:
+	# --- Instanciar plato sobre mesones ---
+	if Input.is_action_just_pressed("instantiate_plate") and pickup_area != null and pickup_area.name.begins_with("MesonPrep"):
 		if pickup_area.current_object == null or not pickup_area.current_object.name.begins_with("Plato"):
 			var plato_scene: PackedScene = preload("res://scenes/Plato.tscn")
 			var plato_instance = plato_scene.instantiate()
@@ -99,6 +113,7 @@ func _process(_delta):
 			pickup_area.current_object = plato_instance
 			pickup_area.has_ingredient = true
 
+	# --- Recoger plato directamente ---
 	if Input.is_action_just_pressed("ui_select") and pickup_area != null:
 		if carrying_object == null:
 			if pickup_area.current_object != null and pickup_area.current_object.name.begins_with("Plato"):
@@ -106,6 +121,7 @@ func _process(_delta):
 				pickup_area.current_object = null
 				pickup_area.has_ingredient = false
 
+	# --- Servir plato ---
 	if Input.is_action_just_pressed("ServeButton"):
 		if carrying_object != null and carrying_object.name.begins_with("Plato"):
 			var root_scene = get_tree().current_scene
@@ -118,7 +134,7 @@ func _process(_delta):
 				if pedidos_manager1.validate_order(carrying_object):
 					pedido_valido = true
 			if pedidos_manager2 != null:
-				if !pedido_valido and pedidos_manager2.validate_order(carrying_object):
+				if not pedido_valido and pedidos_manager2.validate_order(carrying_object):
 					pedido_valido = true
 
 			if pedido_valido:
@@ -129,52 +145,77 @@ func _process(_delta):
 			if score_label != null:
 				score_label.text = str(score)
 
-			if carrying_object != null:
-				carrying_object.queue_free()
-				carrying_object = null
+			carrying_object.queue_free()
+			carrying_object = null
 
+# --- Cortar ingredientes ---
 	if can_cut and carrying_object != null and (carrying_object.name.begins_with("Tomato") or carrying_object.name.begins_with("Lechuga")):
 		if Input.is_action_pressed("cut"):
+			if not cut_sound.playing:
+				cut_sound.play()
 			_cut_timer += _delta
-			if _cut_timer >= CUT_REQUIRED:
-				if carrying_object.has_method("cut"):
-					carrying_object.cut()
-				else:
-					var spr = carrying_object.get_node_or_null("Sprite2D")
-					if spr:
-						spr.modulate = Color(1, 0.6, 0.6)
-				carrying_object.set_meta("is_cut", true)
-				_cut_timer = 0.0
-		else:
+		if _cut_timer >= CUT_REQUIRED:
+			if carrying_object.has_method("cut"):
+				carrying_object.cut()
+			else:
+				var spr = carrying_object.get_node_or_null("Sprite2D")
+				if spr:
+					spr.modulate = Color(1, 0.6, 0.6)
+			carrying_object.set_meta("is_cut", true)
 			_cut_timer = 0.0
 	else:
 		_cut_timer = 0.0
+		if cut_sound.playing:
+			cut_sound.stop()
+		else:
+			_cut_timer = 0.0
+			if cut_sound.playing:
+				cut_sound.stop()
+
+
+	# --- Cocinar carne en hornilla ---
 	if can_cook and carrying_object != null and carrying_object.name.begins_with("Carne"):
 		if Input.is_action_pressed("cook"):
+			# --- reproducir sonido en loop mientras cocinas ---
+			if not cook_sound.playing:
+				cook_sound.play()
+
 			_cook_timer += _delta
 			if _cook_timer >= COOK_REQUIRED:
-				# Ejemplo de "cocinado": cambiar color o marcar meta
 				if carrying_object.has_method("cook"):
 					carrying_object.cook()
 				else:
 					var spr = carrying_object.get_node_or_null("Sprite2D")
 					if spr:
-						spr.modulate = Color(0.8, 0.4, 0.1) # carne dorada
-				carrying_object.set_meta("is_cooked", true)
+						spr.modulate = Color(0.8, 0.4, 0.1) # carne cocida
+					carrying_object.set_meta("is_cooked", true)
 				_cook_timer = 0.0
 		else:
 			_cook_timer = 0.0
+			if cook_sound.playing:
+				cook_sound.stop()
 	else:
 		_cook_timer = 0.0
+		if cook_sound.playing:
+			cook_sound.stop()
 
 
 func _pickup_object(obj: Node2D):
 	carrying_object = obj
+	
 	if carrying_object.get_parent() != null:
 		carrying_object.get_parent().remove_child(carrying_object)
+	
+	# Añadir al jugador
 	add_child(carrying_object)
+	
+	# Posición centrada sobre el player (puedes ajustar offset)
+	var hold_offset = Vector2(0, -16)  # 16 pixels arriba del centro del jugador
 	carrying_object.position = hold_offset
+	
+	# Z-index alto para que se vea encima del jugador
 	carrying_object.z_index = 50
+
 
 func _spawn_ingredient(path:String):
 	var scene: PackedScene = load(path)
@@ -184,16 +225,43 @@ func _spawn_ingredient(path:String):
 func _drop_object(target):
 	if carrying_object == null:
 		return
+
+	# Quitar del padre actual
 	if carrying_object.get_parent() != null:
 		carrying_object.get_parent().remove_child(carrying_object)
+
+	# Caso 1: Plato o mesón con add_ingredient
 	if target.has_method("add_ingredient"):
 		target.add_ingredient(carrying_object)
+
+	# Caso 2: Mesón normal (con script meson_prep.gd)
+	elif target.is_in_group("mesones"):  # 👈 Usa un grupo para identificar mesones
+		if target.has_ingredient and target.current_object != null:
+			print("❌ Este mesón ya tiene un objeto:", target.current_object.name)
+			# Cancelamos: devolver el objeto al jugador
+			add_child(carrying_object)
+			carrying_object.position = Vector2(0, -16)
+			carrying_object.z_index = 50
+			return
+		else:
+			target.add_child(carrying_object)
+			carrying_object.position = Vector2.ZERO
+			carrying_object.z_index = 10
+			target.has_ingredient = true
+			target.current_object = carrying_object
+
+	# Caso 3: Si el target es un ingrediente u otro Node2D sin script de mesón
 	else:
-		target.add_child(carrying_object)
-		carrying_object.position = Vector2.ZERO
-		carrying_object.z_index = 10
-		target.has_ingredient = true
+		print("⚠️ No se puede soltar encima de", target.name)
+		# Lo devolvemos al jugador
+		add_child(carrying_object)
+		carrying_object.position = Vector2(0, -16)
+		carrying_object.z_index = 50
+		return
+
+	# Soltar finalizado
 	carrying_object = null
+
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):

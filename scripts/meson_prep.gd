@@ -6,6 +6,7 @@ var current_object: Node2D = null
 var plato_instance: Node2D = null
 
 func _ready():
+	add_to_group("mesones")
 	var area = $Area2D
 	if area:
 		area.body_entered.connect(_on_Area2D_body_entered)

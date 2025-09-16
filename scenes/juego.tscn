@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cnbwfi65piakj"]
 
-[ext_resource type="PackedScene" path="res://scenes/pedidos.tscn" id="1_ebtnq"]
+[ext_resource type="PackedScene" uid="uid://c40flbduh0kga" path="res://scenes/pedidos.tscn" id="1_ebtnq"]
 [ext_resource type="PackedScene" uid="uid://c4mst2y6yq6jq" path="res://scenes/player.tscn" id="2_nxr8p"]
 [ext_resource type="AudioStream" uid="uid://b613nu1h5ws4r" path="res://audio/musica_fondo.mp3" id="4_pew7j"]
 [ext_resource type="PackedScene" uid="uid://dbop61rcx5wtm" path="res://scenes/hornilla.tscn" id="5_hornilla"]
@@ -27,16 +27,20 @@ size = Vector2(95, 482)
 [node name="Juego" type="Node2D"]
 
 [node name="Control" parent="." instance=ExtResource("1_ebtnq")]
+offset_left = 17.0
+offset_top = 9.0
+offset_right = 57.0
+offset_bottom = 49.0
 
 [node name="Player" parent="." instance=ExtResource("2_nxr8p")]
 position = Vector2(360, 355)
 
 [node name="Hornilla1" parent="." instance=ExtResource("5_hornilla")]
-position = Vector2(391, 116)
+position = Vector2(401, 118)
 scale = Vector2(0.35, 0.35)
 
 [node name="Hornilla2" parent="." instance=ExtResource("5_hornilla")]
-position = Vector2(507, 116)
+position = Vector2(512, 118)
 scale = Vector2(0.35, 0.35)
 
 [node name="MesaCortar1" parent="." instance=ExtResource("6_mesa")]
@@ -52,23 +56,23 @@ position = Vector2(483, 504)
 scale = Vector2(0.35, 0.35)
 
 [node name="MesonPrep1" parent="." instance=ExtResource("7_prep")]
-position = Vector2(338, 174)
+position = Vector2(345, 150)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesonPrep2" parent="." instance=ExtResource("7_prep")]
-position = Vector2(270, 174)
+position = Vector2(272, 150)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesonPrep3" parent="." instance=ExtResource("7_prep")]
-position = Vector2(202, 174)
+position = Vector2(198, 150)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesonPrep4" parent="." instance=ExtResource("7_prep")]
-position = Vector2(134, 174)
+position = Vector2(123, 150)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesonPrep5" parent="." instance=ExtResource("7_prep")]
-position = Vector2(66, 174)
+position = Vector2(48, 149)
 scale = Vector2(0.2, 0.2)
 
 [node name="MesonPrep6" parent="." instance=ExtResource("7_prep")]
@@ -93,6 +97,7 @@ scale = Vector2(0.1, 0.1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_pew7j")
+volume_db = -10.884
 autoplay = true
 
 [node name="ServStation3" type="StaticBody2D" parent="."]
@@ -146,7 +151,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tomate"]
-position = Vector2(126, 167)
+position = Vector2(117, 166)
 shape = SubResource("RectangleShape2D_jbqw7")
 
 [node name="Carne" type="StaticBody2D" parent="."]
@@ -184,7 +189,7 @@ shape = SubResource("RectangleShape2D_jbqw7")
 [node name="ServStation" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ServStation"]
-position = Vector2(681.5, 411)
+position = Vector2(696, 409)
 shape = SubResource("RectangleShape2D_ebtnq")
 debug_color = Color(0.689706, 0.498272, 0, 0.42)
 
@@ -194,10 +199,11 @@ script = ExtResource("8_5g1u2")
 [node name="Timer" type="Timer" parent="GameController"]
 
 [node name="TimerLabel" type="Label" parent="GameController"]
-offset_left = 1023.0
-offset_top = 44.0
-offset_right = 1144.0
-offset_bottom = 118.0
+offset_left = 991.0
+offset_top = 31.0
+offset_right = 1112.0
+offset_bottom = 105.0
+scale = Vector2(3, 3)
 
 [node name="GameOverPanel" type="Panel" parent="GameController"]
 visible = false

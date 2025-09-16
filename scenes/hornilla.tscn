@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dbop61rcx5wtm"]
 
 [ext_resource type="Texture2D" uid="uid://b638el067q8e5" path="res://assets/hornilla.png" id="1_hornilla"]
-[ext_resource type="Script" uid="uid://dtxs4am6biv6l" path="res://scenes/hornilla.gd" id="1_uv12m"]
+[ext_resource type="Script" uid="uid://dtxs4am6biv6l" path="res://scripts/hornilla.gd" id="1_uv12m"]
 
 [sub_resource type="RectangleShape2D" id="1_shape"]
 size = Vector2(313, 381)
