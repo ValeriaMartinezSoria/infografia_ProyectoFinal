@@ -67,7 +67,16 @@ func _physics_process(_delta):
 func _process(_delta):
 	if Input.is_action_just_pressed("Grab") and pickup_area != null:
 		if carrying_object == null:
-			if pickup_area.name in ["MesonPrep6","MesonPrep7","MesonPrep8","MesonPrep9"] and pickup_area.has_ingredient:
+			# Permitir agarrar ingrediente suelto de meson_prep (sin plato)
+			if pickup_area.plato_instance == null and pickup_area.current_object != null:
+				var ingredient = pickup_area.current_object
+				pickup_area.remove_child(ingredient)
+				add_child(ingredient)
+				carrying_object = ingredient
+				ingredient.position = hold_offset
+				pickup_area.has_ingredient = false
+				pickup_area.current_object = null
+			elif pickup_area.name in ["MesonPrep6","MesonPrep7","MesonPrep8","MesonPrep9"] and pickup_area.has_ingredient:
 				for child in get_parent().get_children():
 					if child is Node2D and (child.name.begins_with("Tomato") or child.name.begins_with("Carne") or child.name.begins_with("Lechuga") or child.name.begins_with("Queso") or child.name.begins_with("Pan")):
 						if child.global_position.distance_to(pickup_area.global_position) < 50:

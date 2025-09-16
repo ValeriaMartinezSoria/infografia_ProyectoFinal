@@ -61,7 +61,13 @@ func instantiate_plate():
 	if plato_instance == null:
 		plato_instance = plato_scene.instantiate()
 		add_child(plato_instance)
-		plato_instance.position = Vector2.ZERO
+		# Centrar el plato en el mesón
+		var meson_center = get_node_or_null("StaticBody2D/Sprite2D")
+		if meson_center:
+			var center = meson_center.position
+			plato_instance.position = center
+		else:
+			plato_instance.position = Vector2.ZERO
 		plato_instance.z_index = 10
 		# Si había un ingrediente, agregarlo al plato
 		if current_object != null and not current_object.name.begins_with("Plato"):
@@ -82,7 +88,13 @@ func add_ingredient(ingredient: Node2D):
 		plato_instance.add_ingredient(ingredient)
 	else:
 		add_child(ingredient)
-		ingredient.position = Vector2(0, -10)
+		# Centrar el ingrediente en el mesón
+		var meson_center = get_node_or_null("StaticBody2D/Sprite2D")
+		if meson_center:
+			var center = meson_center.position
+			ingredient.position = center
+		else:
+			ingredient.position = Vector2.ZERO
 		ingredient.z_index = 10
 		has_ingredient = true
 		current_object = ingredient
