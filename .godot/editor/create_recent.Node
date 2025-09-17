@@ -1,12 +1,12 @@
+Node2D
 Label
+Timer
 Panel
 AudioStreamPlayer2D
 CollisionShape2D
 Area2D
 Control
 Button
-Timer
-Node2D
 Sprite2D
 HBoxContainer
 StaticBody2D

@@ -3,7 +3,7 @@ extends Control
 @export var change_interval: float = 30.0
 var rng := RandomNumberGenerator.new()
 var current_order: Array = []
-var pedido_entregado: bool = false   # 👈 Saber si se sirvió a tiempo
+var pedido_entregado: bool = false
 
 const ING_TEXTURES := {
 	"Pan": preload("res://assets/pan.png"),
@@ -15,7 +15,7 @@ const ING_TEXTURES := {
 
 @onready var pedidos_hbox: HBoxContainer = $PedidosHBox
 @onready var timer: Timer = $Timer
-@onready var root_scene = get_tree().current_scene   # 👈 Para acceder a score
+@onready var root_scene = get_tree().current_scene
 
 func _ready():
 	rng.randomize()
@@ -26,21 +26,16 @@ func _ready():
 
 func _on_Timer_timeout() -> void:
 	if not pedido_entregado and current_order.size() > 0:
-		print("⏰ Pedido no entregado a tiempo! -5 puntos")
-		
-		# Buscar el ScoreLabel y restar
 		var score_label = get_tree().current_scene.get_node("Control/ScoreLabel")
 		if score_label:
 			var current_score = int(score_label.text)
 			current_score -= 5
 			score_label.text = str(current_score)
-	
 	_generate_new_order()
 	timer.start()
 
-
 func _generate_new_order() -> void:
-	pedido_entregado = false  # 👈 se reinicia
+	pedido_entregado = false
 	var middle_count: int = rng.randi_range(1, 4)
 	var keys: Array = ING_TEXTURES.keys()
 	keys.erase("Pan")
@@ -48,7 +43,6 @@ func _generate_new_order() -> void:
 	for i in range(middle_count):
 		middle.append(keys[rng.randi_range(0, keys.size() - 1)])
 	current_order = ["Pan"] + middle + ["Pan"]
-	print("[Pedidos] Nuevo pedido:", current_order)
 	_update_ui()
 
 func _update_ui() -> void:
@@ -72,7 +66,6 @@ func _update_ui() -> void:
 
 func validate_order(plato: Node) -> bool:
 	if plato == null:
-		print("Plato nulo")
 		return false
 	
 	var plate_ingredients: Array = []
@@ -80,18 +73,13 @@ func validate_order(plato: Node) -> bool:
 		if ing.begins_with("Pan"): plate_ingredients.append("Pan")
 		elif ing.begins_with("Queso"): plate_ingredients.append("Queso")
 		elif ing.begins_with("Lechuga"): plate_ingredients.append("Lechuga")
-		elif ing.begins_with("Tomato"): plate_ingredients.append("Tomate")
+		elif ing.begins_with("Tomate"): plate_ingredients.append("Tomate")
 		elif ing.begins_with("Carne"): plate_ingredients.append("Carne")
 
-	print("Pedido esperado:", current_order)
-	print("Plato recibido:", plate_ingredients)
-
 	if plate_ingredients == current_order:
-		print("[Pedidos] Pedido correcto! 🎉")
-		pedido_entregado = true   # 👈 Marca que sí se cumplió
+		pedido_entregado = true
 		_generate_new_order()
 		timer.start()
 		return true
 	else:
-		print("[Pedidos] Pedido incorrecto 😢")
 		return false
