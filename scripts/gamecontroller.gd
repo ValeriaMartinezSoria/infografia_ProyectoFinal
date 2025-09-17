@@ -1,13 +1,12 @@
 extends Node2D
 
-@export var game_time_seconds: int = 120  
+@export var game_time_seconds: int = 120
 var time_left: int
 @onready var timer_label: Label = $TimerLabel
 @onready var timer: Timer = $Timer
 
-
 var score: int = 0
-var pedidos: Array = []  
+var pedidos: Array = []
 
 func _ready():
 	time_left = game_time_seconds
@@ -27,26 +26,26 @@ func _on_timer_timeout():
 func _update_ui():
 	var minutes = int(time_left / 60)
 	var seconds = int(time_left % 60)
-
 	var min_text = str(minutes) if minutes >= 10 else "0" + str(minutes)
 	var sec_text = str(seconds) if seconds >= 10 else "0" + str(seconds)
-
 	timer_label.text = min_text + ":" + sec_text
 
-
 func _pause_game():
-	print("⏰ Tiempo terminado! Juego pausado")
 	get_tree().paused = true
-
+	var panel = $GameOverPanel
+	panel.visible = true
+	var label = panel.get_node("Label")
+	label.visible = true
+	if score >= 50:
+		label.text = "¡Felicidades! Ganaste 🎉\nPuntaje final: " + str(score)
+	else:
+		label.text = "Lo siento, perdiste 😢\nPuntaje final: " + str(score)
 
 func entregar_pedido(plato) -> void:
 	if pedidos.is_empty():
-		print("⚠️ No hay pedidos activos")
 		return
-
-	var pedido_actual = pedidos[0] 
+	var pedido_actual = pedidos[0]
 	var ingredientes = plato.get_ingredientes()
-
 	var valido = true
 	for req in pedido_actual:
 		var encontrado = false
@@ -57,11 +56,6 @@ func entregar_pedido(plato) -> void:
 		if not encontrado:
 			valido = false
 			break
-
 	if valido:
 		score += 10
-		print("✅ Cliente feliz! +10 puntos. Puntaje:", score)
-	else:
-		print("❌ El cliente no quedó satisfecho...")
-
 	pedidos.pop_front()
