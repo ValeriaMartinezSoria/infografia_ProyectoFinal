@@ -1,6 +1,4 @@
 res://scenes/player.tscn
-res://scripts/gamecontroller.gd
-res://scripts/pedidos_manager.gd
 res://scenes/hornilla.tscn
 res://scenes/mesa_paracortar.tscn
 res://scenes/main.tscn
@@ -9,4 +7,4 @@ res://scenes/mesa_plates.tscn
 res://scenes/meson_prep.tscn
 res://scenes/plato.tscn
 res://scenes/mesa_cortar.tscn
-res://scripts/visual_timer.gd
+res://scripts/player.gd

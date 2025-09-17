@@ -5,6 +5,7 @@ const SPEED = 300.0
 var last_direction = "down"
 
 var carrying_object = null
+var carrying_object_original_scale = null
 var can_pickup = false
 var pickup_area = null
 var can_pickup_tomato = false
@@ -78,7 +79,9 @@ func _process(_delta):
 				pickup_area.remove_child(ingredient)
 				add_child(ingredient)
 				carrying_object = ingredient
-				ingredient.position = hold_offset
+				carrying_object_original_scale = carrying_object.scale
+				carrying_object.position = Vector2(0, 10)
+				carrying_object.scale = carrying_object_original_scale * 0.5
 				pickup_area.has_ingredient = false
 				pickup_area.current_object = null
 			elif pickup_area.name in ["MesonPrep6","MesonPrep7","MesonPrep8","MesonPrep9"] and pickup_area.has_ingredient:
@@ -203,17 +206,21 @@ func _process(_delta):
 
 func _pickup_object(obj: Node2D):
 	carrying_object = obj
-	
+
 	if carrying_object.get_parent() != null:
 		carrying_object.get_parent().remove_child(carrying_object)
-	
+
+	carrying_object_original_scale = carrying_object.scale
+
 	# Añadir al jugador
 	add_child(carrying_object)
-	
-	# Posición centrada sobre el player (puedes ajustar offset)
-	var hold_offset = Vector2(0, -16)  # 16 pixels arriba del centro del jugador
-	carrying_object.position = hold_offset
-	
+
+	# Offset visual: aún más cerca del jugador
+	carrying_object.position = Vector2(-5, 5)
+
+	# Reducir la escala aún más mientras lo sostiene
+	carrying_object.scale = carrying_object_original_scale * 0.5
+
 	# Z-index alto para que se vea encima del jugador
 	carrying_object.z_index = 50
 
@@ -226,6 +233,11 @@ func _spawn_ingredient(path:String):
 func _drop_object(target):
 	if carrying_object == null:
 		return
+
+	# Restaurar la escala original antes de soltar
+	if carrying_object_original_scale != null:
+		carrying_object.scale = carrying_object_original_scale
+		carrying_object_original_scale = null
 
 	# Quitar del padre actual
 	if carrying_object.get_parent() != null:
