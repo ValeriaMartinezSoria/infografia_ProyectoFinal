@@ -37,9 +37,9 @@ func _pause_game():
 	var label = panel.get_node("Label")
 	label.visible = true
 	if score >= 50:
-		label.text = "¡Felicidades! Ganaste 🎉\nPuntaje final: " + str(score)
+		label.text = "¡Felicidades! Ganaste \nPuntaje final: " + str(score)
 	else:
-		label.text = "Lo siento, perdiste 😢\nPuntaje final: " + str(score)
+		label.text = "Lo siento, perdiste \nPuntaje final: " + str(score)
 
 func entregar_pedido(plato) -> void:
 	if pedidos.is_empty():

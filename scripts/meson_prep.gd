@@ -31,10 +31,10 @@ func _on_Area2D_body_entered(body):
 				body.can_pickup_tomato = true
 			"MesonPrep6", "MesonPrep7", "MesonPrep8", "MesonPrep9":
 				if has_ingredient:
-					print("❌ Este mesón YA tiene un ingrediente o plato")
+					print("Este mesón YA tiene un ingrediente o plato")
 					body.can_pickup = false
 				else:
-					print("✅ Mesón de preparación disponible")
+					print(" Mesón de preparación disponible")
 	if name.begins_with("ServStation"):
 		print("Estación de servicio detectada por: ", body.name)
 		body.can_serve = true
@@ -73,9 +73,9 @@ func instantiate_plate():
 		else:
 			current_object = plato_instance
 		has_ingredient = true
-		print("🍽 Plato instanciado en", name)
+		print(" Plato instanciado en", name)
 	else:
-		print("❌ Ya hay un plato en este mesón")
+		print(" Ya hay un plato en este mesón")
 
 # --- Agregar ingrediente al plato ---
 func add_ingredient(ingredient: Node2D):

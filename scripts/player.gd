@@ -73,7 +73,7 @@ func _process(_delta):
 	# --- Recoger o soltar ingredientes ---
 	if Input.is_action_just_pressed("Grab") and pickup_area != null:
 		if carrying_object == null:
-			# Permitir agarrar ingrediente suelto de meson_prep (sin plato)
+			
 			if pickup_area.plato_instance == null and pickup_area.current_object != null:
 				var ingredient = pickup_area.current_object
 				pickup_area.remove_child(ingredient)
@@ -105,7 +105,7 @@ func _process(_delta):
 			var target = pickup_area.current_object if pickup_area.current_object != null else pickup_area
 			_drop_object(target)
 
-	# --- Instanciar plato sobre mesones ---
+	
 	if Input.is_action_just_pressed("instantiate_plate") and pickup_area != null and pickup_area.name.begins_with("MesonPrep"):
 		if pickup_area.current_object == null or not pickup_area.current_object.name.begins_with("Plato"):
 			var plato_scene: PackedScene = preload("res://scenes/Plato.tscn")
@@ -117,7 +117,7 @@ func _process(_delta):
 			pickup_area.current_object = plato_instance
 			pickup_area.has_ingredient = true
 
-	# --- Recoger plato directamente ---
+	
 	if Input.is_action_just_pressed("ui_select") and pickup_area != null:
 		if carrying_object == null:
 			if pickup_area.current_object != null and pickup_area.current_object.name.begins_with("Plato"):
@@ -125,7 +125,7 @@ func _process(_delta):
 				pickup_area.current_object = null
 				pickup_area.has_ingredient = false
 
-	# --- Servir plato ---
+	
 	if Input.is_action_just_pressed("ServeButton"):
 		if carrying_object != null and carrying_object.name.begins_with("Plato"):
 			var root_scene = get_tree().current_scene
@@ -152,7 +152,7 @@ func _process(_delta):
 			carrying_object.queue_free()
 			carrying_object = null
 
-# --- Cortar ingredientes ---
+
 	if can_cut and carrying_object != null and (carrying_object.name.begins_with("Tomato") or carrying_object.name.begins_with("Lechuga")):
 		if Input.is_action_pressed("cut"):
 			if not cut_sound.playing:
@@ -177,10 +177,10 @@ func _process(_delta):
 				cut_sound.stop()
 
 
-	# --- Cocinar carne en hornilla ---
+
 	if can_cook and carrying_object != null and carrying_object.name.begins_with("Carne"):
 		if Input.is_action_pressed("cook"):
-			# --- reproducir sonido en loop mientras cocinas ---
+			
 			if not cook_sound.playing:
 				cook_sound.play()
 
@@ -191,7 +191,7 @@ func _process(_delta):
 				else:
 					var spr = carrying_object.get_node_or_null("Sprite2D")
 					if spr:
-						spr.modulate = Color(0.8, 0.4, 0.1) # carne cocida
+						spr.modulate = Color(0.8, 0.4, 0.1)
 					carrying_object.set_meta("is_cooked", true)
 				_cook_timer = 0.0
 		else:
@@ -212,16 +212,16 @@ func _pickup_object(obj: Node2D):
 
 	carrying_object_original_scale = carrying_object.scale
 
-	# Añadir al jugador
+	
 	add_child(carrying_object)
 
-	# Offset visual: aún más cerca del jugador
+	
 	carrying_object.position = Vector2(-5, 5)
 
-	# Reducir la escala aún más mientras lo sostiene
+	
 	carrying_object.scale = carrying_object_original_scale * 0.5
 
-	# Z-index alto para que se vea encima del jugador
+	
 	carrying_object.z_index = 50
 
 
@@ -234,24 +234,24 @@ func _drop_object(target):
 	if carrying_object == null:
 		return
 
-	# Restaurar la escala original antes de soltar
+	
 	if carrying_object_original_scale != null:
 		carrying_object.scale = carrying_object_original_scale
 		carrying_object_original_scale = null
 
-	# Quitar del padre actual
+	
 	if carrying_object.get_parent() != null:
 		carrying_object.get_parent().remove_child(carrying_object)
 
-	# Caso 1: Plato o mesón con add_ingredient
+	
 	if target.has_method("add_ingredient"):
 		target.add_ingredient(carrying_object)
 
-	# Caso 2: Mesón normal (con script meson_prep.gd)
-	elif target.is_in_group("mesones"):  # 👈 Usa un grupo para identificar mesones
+	
+	elif target.is_in_group("mesones"): 
 		if target.has_ingredient and target.current_object != null:
-			print("❌ Este mesón ya tiene un objeto:", target.current_object.name)
-			# Cancelamos: devolver el objeto al jugador
+			print(" Este mesón ya tiene un objeto:", target.current_object.name)
+			
 			add_child(carrying_object)
 			carrying_object.position = Vector2(0, -16)
 			carrying_object.z_index = 50
@@ -263,16 +263,16 @@ func _drop_object(target):
 			target.has_ingredient = true
 			target.current_object = carrying_object
 
-	# Caso 3: Si el target es un ingrediente u otro Node2D sin script de mesón
+	
 	else:
-		print("⚠️ No se puede soltar encima de", target.name)
-		# Lo devolvemos al jugador
+		print(" No se puede soltar encima de", target.name)
+		
 		add_child(carrying_object)
 		carrying_object.position = Vector2(0, -16)
 		carrying_object.z_index = 50
 		return
 
-	# Soltar finalizado
+	
 	carrying_object = null
 
 

@@ -24,5 +24,5 @@ func add_ingredient(ingredient: Node2D) -> void:
 	if ingredient.has_method("set_centered"):
 		ingredient.set_centered(true)
 
-	print("✅ Ingrediente agregado al plato:", ing_name)
-	print("🍽️ Plato ahora contiene:", ingredients)
+	print(" Ingrediente agregado al plato:", ing_name)
+	print(" Plato ahora contiene:", ingredients)
