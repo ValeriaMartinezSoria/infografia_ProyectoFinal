@@ -13,7 +13,7 @@ Este proyecto fue creado como parte de un trabajo académico, integrando concept
 -  Preparación y **servido de platos completos** con un solo botón.
 -  Estilo visual simple pero funcional, centrado en la jugabilidad.
 -  Efectos de sonido para mejorar la experiencia inmersiva.
-
+- (Código final en main)
 ---
 
 ##  Controles
@@ -63,3 +63,4 @@ Este proyecto fue creado como parte de un trabajo académico, integrando concept
 ## Licencia
 Este proyecto es de uso académico y educativo.  
 No tiene fines comerciales y está inspirado en *Overcooked*.
+
